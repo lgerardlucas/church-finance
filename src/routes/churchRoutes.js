@@ -1,6 +1,5 @@
-// routes/churchRoutes.js
+// Recebe as requisições para o banco de dados
 const express = require("express");
-const userChurch = require("../models/churchModel");
 const {
   createChurch,
   listChurch,
@@ -11,12 +10,12 @@ const {
 
 const router = express.Router();
 
-router.post("/", createChurch);
+router.post("/church", createChurch);
 
-router.get("/", listChurch).get("/:id", findChurch);
+router.get("/churchs", listChurch).get("/church/:id", findChurch);
 
-router.delete("/:id", deleteChurch);
+router.delete("/church/:id", deleteChurch);
 
-router.patch("/:id", updateChurch);
+router.patch("/church/:id", updateChurch);
 
 module.exports = router;

@@ -1,8 +1,15 @@
-const userChurch = require("../models/churchModel");
+// Lida com as requisições para o banco de dados
+const {
+  createChurch,
+  listChurch,
+  findChurch,
+  deleteChurch,
+  updateChurch,
+} = require("../services/churchService");
 
 exports.createChurch = async (req, res) => {
   try {
-    const church = await userChurch.create(req.body);
+    const church = await createChurch(req.body);
     res.status(200).json(church);
   } catch (error) {
     res.status(500).send(error.message);
@@ -11,7 +18,7 @@ exports.createChurch = async (req, res) => {
 
 exports.listChurch = async (req, res) => {
   try {
-    const churchs = await userChurch.find({});
+    const churchs = await listChurch();
     res.status(200).json(churchs);
   } catch (error) {
     res.status(500).send(error.message);
@@ -20,7 +27,7 @@ exports.listChurch = async (req, res) => {
 
 exports.findChurch = async (req, res) => {
   try {
-    const churchs = await userChurch.findById(req.params.id);
+    const churchs = await findChurch(req.params.id);
     res.status(200).json(churchs);
   } catch (error) {
     res.status(500).send(error.message);
@@ -29,7 +36,7 @@ exports.findChurch = async (req, res) => {
 
 exports.deleteChurch = async (req, res) => {
   try {
-    const churchs = await userChurch.findByIdAndDelete(req.params.id);
+    const churchs = await deleteChurch(req.params.id);
     res.status(200).json(churchs);
   } catch (error) {
     res.status(500).send(error.message);
@@ -38,13 +45,7 @@ exports.deleteChurch = async (req, res) => {
 
 exports.updateChurch = async (req, res) => {
   try {
-    const churchs = await userChurch.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new: true,
-      }
-    );
+    const churchs = await updateChurch(req.params.id, req.body);
     res.status(200).json(churchs);
   } catch (error) {
     res.status(500).send(error.message);
