@@ -25,6 +25,24 @@ exports.findChurch = async (id) => {
   }
 };
 
+exports.findChurchPartition = async (value) => {
+  try {
+    return await userChurch.find({
+      $or: [
+        { name: { $regex: value, $options: "i" } },
+        { address: { $regex: value, $options: "i" } },
+        { district: { $regex: value, $options: "i" } },
+        { city: { $regex: value, $options: "i" } },
+        { state: { $regex: value, $options: "i" } },
+        { country: { $regex: value, $options: "i" } },
+        { zipecode: { $regex: value, $options: "i" } },
+      ],
+    });
+  } catch (err) {
+    throw Error(err.message);
+  }
+};
+
 exports.deleteChurch = async (id) => {
   try {
     return await userChurch.findByIdAndDelete(id);

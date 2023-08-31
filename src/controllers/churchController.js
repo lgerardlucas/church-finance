@@ -1,9 +1,10 @@
 // Lida com as requisições para o banco de dados
-const { check, validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 const {
   createChurch,
   listChurch,
   findChurch,
+  findChurchPartition,
   deleteChurch,
   updateChurch,
 } = require("../services/churchService");
@@ -19,7 +20,7 @@ exports.createChurch = async (req, res) => {
     const church = await createChurch(req.body);
     res.status(200).json(church);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -28,7 +29,7 @@ exports.listChurch = async (req, res) => {
     const churchs = await listChurch();
     res.status(200).json(churchs);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -37,7 +38,16 @@ exports.findChurch = async (req, res) => {
     const churchs = await findChurch(req.params.id);
     res.status(200).json(churchs);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.findChurchPartition = async (req, res) => {
+  try {
+    const churchs = await findChurchPartition(req.params.name);
+    res.status(200).json(churchs);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -46,7 +56,7 @@ exports.deleteChurch = async (req, res) => {
     const churchs = await deleteChurch(req.params.id);
     res.status(200).json(churchs);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -61,6 +71,6 @@ exports.updateChurch = async (req, res) => {
     const churchs = await updateChurch(req.params.id, req.body);
     res.status(200).json(churchs);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).json({ message: error.message });
   }
 };

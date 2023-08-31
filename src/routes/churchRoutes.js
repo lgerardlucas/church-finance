@@ -5,6 +5,7 @@ const {
   createChurch,
   listChurch,
   findChurch,
+  findChurchPartition,
   deleteChurch,
   updateChurch,
 } = require("../controllers/churchController");
@@ -84,7 +85,10 @@ const validateChurchFields = [
 
 router.post("/church", validateChurchFields, createChurch);
 
-router.get("/churchs", listChurch).get("/church/:id", findChurch);
+router
+  .get("/churchs", listChurch)
+  .get("/church/:id", findChurch)
+  .get("/church/filter/:name", findChurchPartition);
 
 router.delete("/church/:id", deleteChurch);
 
