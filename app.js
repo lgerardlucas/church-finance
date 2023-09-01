@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const connectBD = require("./src/database/connect");
 
 // Read .env
-dotenv.config();
+module.exports = dotenv.config();
 
 // Connect to database
 connectBD();
