@@ -5,6 +5,7 @@ const {
   listChurch,
   findChurch,
   findChurchPartition,
+  findChurchType,
   deleteChurch,
   updateChurch,
 } = require("../services/churchService");
@@ -18,7 +19,11 @@ exports.createChurch = async (req, res) => {
 
   try {
     const church = await createChurch(req.body);
-    res.status(200).json(church);
+    if (church.length == 1) {
+      res.status(200).json(church);
+    } else {
+      res.status(200).json({ inserted: church.length });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

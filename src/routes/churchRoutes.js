@@ -3,9 +3,11 @@ const express = require("express");
 const { check } = require("express-validator");
 const {
   createChurch,
+  createBulkChurch,
   listChurch,
   findChurch,
   findChurchPartition,
+  findChurchType,
   deleteChurch,
   updateChurch,
 } = require("../controllers/churchController");
@@ -49,8 +51,8 @@ const validateChurchFields = [
 
   check("state")
     .optional({ checkFalsy: true })
-    .isLength({ min: 5 })
-    .withMessage("Mínimo de 5 caracteres.")
+    .isLength({ min: 2, max: 2 })
+    .withMessage("Mínimo de 2 caracteres.")
     .custom((value, { req }) => {
       if (!value && req.method === "PATCH") {
         throw new Error("O campo não pode estar vazio");

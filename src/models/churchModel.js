@@ -1,6 +1,7 @@
-const momngoose = require("mongoose");
+const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 
-const churchSchema = new momngoose.Schema({
+const churchSchema = new mongoose.Schema({
   name: {
     type: String,
     require: true,
@@ -31,8 +32,21 @@ const churchSchema = new momngoose.Schema({
     type: String,
     require: true,
   },
+  type: {
+    type: String,
+    enum: ["paroquia", "igreja"],
+    required: true,
+  },
+  _idtype: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "churche",
+  },
 });
 
-const churchModel = momngoose.model("church", churchSchema);
+churchSchema.plugin(uniqueValidator, {
+  message: "O valor '{VALUE}' para o campo '{PATH}' já está no banco de dados.",
+});
+
+const churchModel = mongoose.model("church", churchSchema);
 
 module.exports = churchModel;

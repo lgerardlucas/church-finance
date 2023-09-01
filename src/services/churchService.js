@@ -1,4 +1,5 @@
 // Trata das regras de negóicio
+const { check } = require("express-validator");
 const userChurch = require("../models/churchModel");
 
 exports.createChurch = async (church) => {
@@ -36,6 +37,7 @@ exports.findChurchPartition = async (value) => {
         { state: { $regex: value, $options: "i" } },
         { country: { $regex: value, $options: "i" } },
         { zipecode: { $regex: value, $options: "i" } },
+        { type: { $regex: value, $options: "i" } },
       ],
     });
   } catch (err) {
