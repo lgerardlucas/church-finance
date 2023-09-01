@@ -1,11 +1,8 @@
 const https = require("https");
 const fs = require("fs");
 const express = require("express");
-const dotenv = require("dotenv");
+require("dotenv").config();
 const connectBD = require("./src/database/connect");
-
-// Read .env
-module.exports = dotenv.config();
 
 // Connect to database
 connectBD();
