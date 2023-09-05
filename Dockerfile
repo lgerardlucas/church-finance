@@ -8,7 +8,7 @@ WORKDIR /opt/church-finance/src/
 COPY package*.json ./
 
 # Execute npm install para instalar as dependências do aplicativo.
-RUN npm ci
+RUN npm install
 
 # Copie todo o código do aplicativo para o contêiner.
 COPY . .
