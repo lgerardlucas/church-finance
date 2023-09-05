@@ -2,7 +2,7 @@
 FROM node:18
 
 # Crie e defina o diretório de trabalho no contêiner.
-WORKDIR /opt/church-finance/src/
+WORKDIR /usr/app/
 
 # Copie o arquivo package.json e package-lock.json (se existir) para o contêiner.
 COPY package*.json ./
@@ -23,4 +23,4 @@ ENV MONGODB_USERNAME=lgerardlucas
 ENV MONGODB_PASSWORD=JdzStE3fL27ZfT4t
 
 # Defina o comando para iniciar o aplicativo quando o contêiner for iniciado.
-CMD [ "npm", "run", "start" ]
+CMD [ "node", "app.js" ]
