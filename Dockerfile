@@ -16,7 +16,6 @@ COPY . .
 # Exponha a porta em que o aplicativo será executado.
 EXPOSE 3000
 
-# Configure as variáveis de ambiente
 ENV PORT=3000
 ENV MONGODB_DATABASE=nodejschurchfinance.xo6an7u.mongodb.net/?retryWrites=true&w=majorityd
 ENV MONGODB_USERNAME=lgerardlucas
