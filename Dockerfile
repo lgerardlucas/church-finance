@@ -18,7 +18,7 @@ EXPOSE 3000
 
 # Configure as variáveis de ambiente
 ENV PORT=3000
-ENV MONGODB_DATABASEd=nodejschurchfinance.xo6an7u.mongodb.net/?retryWrites=true&w=majorityd
+ENV MONGODB_DATABASE=nodejschurchfinance.xo6an7u.mongodb.net/?retryWrites=true&w=majorityd
 ENV MONGODB_USERNAME=lgerardlucas
 ENV MONGODB_PASSWORD=JdzStE3fL27ZfT4t
 
