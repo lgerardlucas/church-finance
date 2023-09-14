@@ -12,7 +12,7 @@ const churchController = {
 
     try {
       console.log("church");
-      const church = await churchService.createChurch(req.body);
+      const church = await churchService.create(req.body);
       if (church.length == 1) {
         res.status(200).json(church);
       } else {
@@ -25,7 +25,7 @@ const churchController = {
 
   listChurch: async (req, res) => {
     try {
-      const churchs = await churchService.listChurch();
+      const churchs = await churchService.list();
       res.status(200).json(churchs);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -34,7 +34,7 @@ const churchController = {
 
   findChurch: async (req, res) => {
     try {
-      const churchs = await churchService.findChurch(req.params.id);
+      const churchs = await churchService.find(req.params.id);
       res.status(200).json(churchs);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -43,7 +43,7 @@ const churchController = {
 
   findChurchPartition: async (req, res) => {
     try {
-      const churchs = await churchService.findChurchPartition(req.params.name);
+      const churchs = await churchService.findPartition(req.params.name);
       res.status(200).json(churchs);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -52,7 +52,7 @@ const churchController = {
 
   deleteChurch: async (req, res) => {
     try {
-      const churchs = await churchService.deleteChurch(req.params.id);
+      const churchs = await churchService.delete(req.params.id);
       res.status(200).json(churchs);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -67,7 +67,7 @@ const churchController = {
     }
 
     try {
-      const churchs = await churchService.updateChurch(req.params.id, req.body);
+      const churchs = await churchService.update(req.params.id, req.body);
       res.status(200).json(churchs);
     } catch (error) {
       res.status(500).json({ message: error.message });
