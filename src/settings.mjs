@@ -1,4 +1,4 @@
-const path = require("path");
+import path from "path";
 
 async function getBaseDir() {
   return path.dirname(__dirname);

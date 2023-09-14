@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator");
+import mongoose from "mongoose";
+import uniqueValidator from "mongoose-unique-validator";
 
 const churchSchema = new mongoose.Schema({
   name: {
@@ -49,4 +49,4 @@ churchSchema.plugin(uniqueValidator, {
 
 const churchModel = mongoose.model("church", churchSchema);
 
-module.exports = churchModel;
+export default churchModel;

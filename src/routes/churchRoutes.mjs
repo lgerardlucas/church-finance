@@ -1,16 +1,7 @@
 // Recebe as requisições para o banco de dados
-const express = require("express");
-const { check } = require("express-validator");
-const {
-  createChurch,
-  createBulkChurch,
-  listChurch,
-  findChurch,
-  findChurchPartition,
-  findChurchType,
-  deleteChurch,
-  updateChurch,
-} = require("../controllers/churchController");
+import express from "express";
+import { check } from "express-validator";
+import churchController from "../controllers/churchController.mjs";
 
 const router = express.Router();
 
@@ -85,15 +76,19 @@ const validateChurchFields = [
     }),
 ];
 
-router.post("/church", validateChurchFields, createChurch);
+router.post("/church", validateChurchFields, churchController.createChurch);
 
 router
-  .get("/churchs", listChurch)
-  .get("/church/:id", findChurch)
-  .get("/church/filter/:name", findChurchPartition);
+  .get("/churchs", churchController.listChurch)
+  .get("/church/:id", churchController.findChurch)
+  .get("/church/filter/:name", churchController.findChurchPartition);
 
-router.delete("/church/:id", deleteChurch);
+router.delete("/church/:id", churchController.deleteChurch);
 
-router.patch("/church/:id", validateChurchFields, updateChurch);
+router.patch(
+  "/church/:id",
+  validateChurchFields,
+  churchController.updateChurch
+);
 
-module.exports = router;
+export { router as churchRoutes };
