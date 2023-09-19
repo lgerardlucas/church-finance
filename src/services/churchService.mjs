@@ -11,7 +11,7 @@ const churchService = {
 
   list: async () => {
     try {
-      return await churchModel.find({}).populate("parishName").lean();
+      return await churchModel.find({}).populate("_paroquia").lean();
     } catch (err) {
       throw Error(err.message);
     }
@@ -19,7 +19,7 @@ const churchService = {
 
   find: async (id) => {
     try {
-      return await churchModel.findById(id).populate("parishName").lean();
+      return await churchModel.findById(id).populate("_paroquia").lean();
     } catch (err) {
       throw Error(err.message);
     }
@@ -27,8 +27,10 @@ const churchService = {
 
   findPartition: async (value) => {
     try {
+      const regex = new RegExp(value, "i");
+
       return await churchModel.find({
-        $or: [{ $text: { $search: value } }],
+        name: { $regex: regex },
       });
     } catch (err) {
       throw Error(err.message);

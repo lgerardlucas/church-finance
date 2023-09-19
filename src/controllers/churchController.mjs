@@ -3,7 +3,7 @@ import { validationResult } from "express-validator";
 import churchService from "../services/churchService.mjs";
 
 const churchController = {
-  createChurch: async (req, res) => {
+  create: async (req, res) => {
     // Verifica os erros de validação
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -23,7 +23,7 @@ const churchController = {
     }
   },
 
-  listChurch: async (req, res) => {
+  list: async (req, res) => {
     try {
       const churchs = await churchService.list();
       res.status(200).json(churchs);
@@ -32,7 +32,7 @@ const churchController = {
     }
   },
 
-  findChurch: async (req, res) => {
+  find: async (req, res) => {
     try {
       const churchs = await churchService.find(req.params.id);
       res.status(200).json(churchs);
@@ -41,7 +41,7 @@ const churchController = {
     }
   },
 
-  findChurchPartition: async (req, res) => {
+  findPartition: async (req, res) => {
     try {
       const churchs = await churchService.findPartition(req.params.name);
       res.status(200).json(churchs);
@@ -50,7 +50,7 @@ const churchController = {
     }
   },
 
-  deleteChurch: async (req, res) => {
+  delete: async (req, res) => {
     try {
       const churchs = await churchService.delete(req.params.id);
       res.status(200).json(churchs);
@@ -59,7 +59,7 @@ const churchController = {
     }
   },
 
-  updateChurch: async (req, res) => {
+  update: async (req, res) => {
     // Verifica os erros de validação
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

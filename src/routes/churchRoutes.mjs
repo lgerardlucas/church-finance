@@ -76,19 +76,15 @@ const validateChurchFields = [
     }),
 ];
 
-router.post("/church", validateChurchFields, churchController.createChurch);
+router.post("/church", validateChurchFields, churchController.create);
 
 router
-  .get("/churchs", churchController.listChurch)
-  .get("/church/:id", churchController.findChurch)
-  .get("/church/filter/:name", churchController.findChurchPartition);
+  .get("/churchs", churchController.list)
+  .get("/church/:id", churchController.find)
+  .get("/church/filter/:name", churchController.findPartition);
 
-router.delete("/church/:id", churchController.deleteChurch);
+router.delete("/church/:id", churchController.delete);
 
-router.patch(
-  "/church/:id",
-  validateChurchFields,
-  churchController.updateChurch
-);
+router.patch("/church/:id", validateChurchFields, churchController.update);
 
 export { router as churchRoutes };

@@ -46,7 +46,7 @@ churchSchema.plugin(uniqueValidator, {
   message: "O valor '{VALUE}' para o campo '{PATH}' já está no banco de dados.",
 });
 
-churchSchema.virtual("parishName", {
+churchSchema.virtual("_paroquia", {
   ref: "church", // Referencie o mesmo modelo "church"
   localField: "_idtype",
   foreignField: "_id", // Campo na paróquia onde o _id da igreja é armazenado
