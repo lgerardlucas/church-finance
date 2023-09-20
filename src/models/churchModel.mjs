@@ -1,3 +1,4 @@
+import diacritics from "diacritics";
 import mongoose from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 
@@ -38,8 +39,28 @@ const churchSchema = new mongoose.Schema({
   },
   _idtype: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "church", // Corrija o nome da referência para "church" em vez de "churche"
+    ref: "church",
   },
+  slugFields: {
+    type: String,
+    index: true,
+  },
+});
+
+churchSchema.pre("save", function (next) {
+  this.slugFields = diacritics
+    .remove(
+      this.name +
+        this.address +
+        this.city +
+        this.state +
+        this.country +
+        this.district +
+        this.zipecode
+    )
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9]/g, "");
+  next();
 });
 
 churchSchema.plugin(uniqueValidator, {

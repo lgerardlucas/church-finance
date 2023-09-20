@@ -1,4 +1,5 @@
 import churchModel from "../models/churchModel.mjs";
+import diacritics from "diacritics";
 
 const churchService = {
   create: async (church) => {
@@ -27,11 +28,15 @@ const churchService = {
 
   findPartition: async (value) => {
     try {
-      const regex = new RegExp(value, "i");
+      const textSearch = new RegExp(diacritics.remove(value), "i");
 
-      return await churchModel.find({
-        name: { $regex: regex },
-      });
+      return await churchModel
+        .find({
+          // $text: { $search: textSearch }, //Nao trabalha com porções de texto
+          slugFields: { $regex: textSearch }, //Considera acentos na pesquisa
+        })
+        .populate("_paroquia")
+        .lean();
     } catch (err) {
       throw Error(err.message);
     }
