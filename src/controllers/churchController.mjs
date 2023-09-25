@@ -1,6 +1,6 @@
 // Lida com as requisições para o banco de dados
 import { validationResult } from "express-validator";
-import churchService from "../services/churchService.mjs";
+import churchService from "#services/churchService.mjs";
 
 const churchController = {
   create: async (req, res) => {

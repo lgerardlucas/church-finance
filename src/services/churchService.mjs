@@ -1,5 +1,6 @@
-import churchModel from "../models/churchModel.mjs";
 import diacritics from "diacritics";
+
+import churchModel from "#models/churchModel.mjs";
 
 const churchService = {
   create: async (church) => {

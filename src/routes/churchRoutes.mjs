@@ -1,7 +1,8 @@
 // Recebe as requisições para o banco de dados
 import express from "express";
 import { check } from "express-validator";
-import churchController from "../controllers/churchController.mjs";
+
+import churchController from "#controllers/churchController.mjs";
 
 const router = express.Router();
 

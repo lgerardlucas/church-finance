@@ -1,5 +1,6 @@
-import diacritics from "diacritics";
 import mongoose from "mongoose";
+import diacritics from "diacritics";
+
 import uniqueValidator from "mongoose-unique-validator";
 
 const churchSchema = new mongoose.Schema({
@@ -48,6 +49,7 @@ const churchSchema = new mongoose.Schema({
 });
 
 churchSchema.pre("save", function (next) {
+  // Normalizando um campo para pesquisa
   this.slugFields = diacritics
     .remove(
       this.name +
@@ -64,14 +66,16 @@ churchSchema.pre("save", function (next) {
 });
 
 churchSchema.plugin(uniqueValidator, {
+  // Valida inserção de dados únicos no banco de dados.
   message: "O valor '{VALUE}' para o campo '{PATH}' já está no banco de dados.",
 });
 
 churchSchema.virtual("_paroquia", {
-  ref: "church", // Referencie o mesmo modelo "church"
+  // Criar um relacionamento virtual para o campo _paroquia
+  ref: "church",
   localField: "_idtype",
-  foreignField: "_id", // Campo na paróquia onde o _id da igreja é armazenado
-  justOne: true, // Você está buscando apenas uma paróquia
+  foreignField: "_id",
+  justOne: true,
 });
 
 const churchModel = mongoose.model("church", churchSchema);

@@ -1,11 +1,13 @@
-import https from "https";
 import fs from "fs";
-import express from "express";
-import { format } from "date-fns";
 import dotenv from "dotenv";
-import connectBD from "./src/database/connect.mjs";
+import https from "https";
+import express from "express";
 
-dotenv.config(); // Carregar variáveis de ambiente a partir do arquivo .env
+import format from "date-fns";
+import connectBD from "#database/connect.mjs";
+
+// Carregar variáveis de ambiente a partir do arquivo .env
+dotenv.config();
 
 // Connect to database
 connectBD();
@@ -30,7 +32,7 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-import { churchRoutes } from "./src/routes/churchRoutes.mjs";
+import { churchRoutes } from "#routes/churchRoutes.mjs";
 app.use(churchRoutes);
 
 server.listen(port, () => {
