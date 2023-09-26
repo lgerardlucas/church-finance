@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-import { churchRoutes } from "#routes/churchRoutes.mjs";
+import { churchRoutes } from "#routes/church.mjs";
 app.use(churchRoutes);
 
 server.listen(port, () => {
