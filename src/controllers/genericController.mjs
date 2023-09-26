@@ -8,7 +8,6 @@ class GenericController {
   async create(req, res) {
     try {
       const data = req.body;
-      console.log(data);
       const result = await this.service.create(data);
       res.status(201).json(result);
     } catch (error) {
@@ -41,7 +40,8 @@ class GenericController {
 
   async findPartition(req, res) {
     try {
-      const churchs = await this.service.findPartition(req.params.name);
+      const value = req.params.name;
+      const churchs = await this.service.findPartition(value);
       res.status(200).json(churchs);
     } catch (error) {
       res.status(500).json({ message: error.message });

@@ -1,11 +1,11 @@
 import express from "express";
 import Model from "#models/churchModel.mjs";
 
-import GenericController from "#controllers/genericController.mjs";
+import ChurchController from "#controllers/church.mjs";
 
 const router = express.Router();
 
-const controller = new GenericController(Model);
+const controller = new ChurchController(Model);
 
 router.post("/church", controller.create.bind(controller));
 
