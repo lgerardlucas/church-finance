@@ -7,36 +7,28 @@ const churchSchema = new mongoose.Schema({
   name: {
     type: String,
     require: true,
-    unique: true,
   },
   address: {
     type: String,
-    require: true,
   },
   district: {
     type: String,
-    require: true,
   },
   city: {
     type: String,
-    require: true,
   },
   state: {
     type: String,
-    require: true,
   },
   country: {
     type: String,
-    require: true,
   },
   zipecode: {
     type: String,
-    require: true,
   },
   type: {
     type: String,
     enum: ["paroquia", "igreja"],
-    required: true,
   },
   _idtype: {
     type: mongoose.Schema.Types.ObjectId,
@@ -58,7 +50,8 @@ churchSchema.pre("save", function (next) {
         this.state +
         this.country +
         this.district +
-        this.zipecode
+        this.zipecode +
+        this.type
     )
     .toLowerCase()
     .replace(/[^a-zA-Z0-9]/g, "");
