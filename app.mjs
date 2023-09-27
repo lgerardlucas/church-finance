@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 
 // Routes
 import { churchRoutes } from "#routes/church.mjs";
-app.use(churchRoutes);
+app.use("/church", churchRoutes);
 
 server.listen(port, () => {
   console.log(`Service running on port: ${port}`);
