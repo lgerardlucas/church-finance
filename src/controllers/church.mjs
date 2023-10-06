@@ -2,7 +2,7 @@ import GenericController from "#controllers/genericController.mjs";
 
 class ChurchController extends GenericController {
   constructor(Model) {
-    super(Model);
+    super(Model, "_paroquia");
   }
 }
 

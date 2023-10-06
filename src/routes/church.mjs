@@ -1,4 +1,4 @@
-import Model from "#models/churchModel.mjs";
+import Model from "#models/church.mjs";
 import ChurchController from "#controllers/church.mjs";
 import createRoutes from "#routes/genericRoutes.mjs";
 

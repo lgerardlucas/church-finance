@@ -1,8 +1,8 @@
 import GenericService from "#services/genericService.mjs";
 
 class GenericController {
-  constructor(Model) {
-    this.service = new GenericService(Model);
+  constructor(Model, populate_field = "") {
+    this.service = new GenericService(Model, populate_field);
   }
 
   async create(req, res) {
@@ -41,8 +41,8 @@ class GenericController {
   async findPartition(req, res) {
     try {
       const value = req.params.name;
-      const churchs = await this.service.findPartition(value);
-      res.status(200).json(churchs);
+      const result = await this.service.findPartition(value);
+      res.status(200).json(result);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }

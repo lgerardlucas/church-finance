@@ -1,8 +1,9 @@
 import diacritics from "diacritics";
 
 class GenericService {
-  constructor(Model) {
+  constructor(Model, populate_field = "") {
     this.Model = Model;
+    this.populate_field = populate_field;
   }
 
   async create(data) {
@@ -15,7 +16,7 @@ class GenericService {
 
   async list() {
     try {
-      return await this.Model.find();
+      return await this.Model.find().populate(this.populate_field).lean();
     } catch (error) {
       throw error;
     }
@@ -23,7 +24,7 @@ class GenericService {
 
   async findById(id) {
     try {
-      return await this.Model.findById(id);
+      return await this.Model.findById(id).populate(this.populate_field).lean();
     } catch (error) {
       throw error;
     }
@@ -35,7 +36,9 @@ class GenericService {
 
       return await this.Model.find({
         slugFields: { $regex: textSearch },
-      });
+      })
+        .populate(this.populate_field)
+        .lean();
     } catch (err) {
       throw Error(err.message);
     }

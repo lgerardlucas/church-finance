@@ -2,7 +2,6 @@ import fs from "fs";
 import dotenv from "dotenv";
 import https from "https";
 import express from "express";
-
 import format from "date-fns";
 import connectBD from "#database/connect.mjs";
 
@@ -32,8 +31,12 @@ app.get("/", (req, res) => {
 });
 
 // Routes
+import { authRoutes } from "#routes/auth.mjs";
 import { churchRoutes } from "#routes/church.mjs";
+import { userRoutes } from "#routes/user.mjs";
+app.use("/", authRoutes);
 app.use("/church", churchRoutes);
+app.use("/user", userRoutes);
 
 server.listen(port, () => {
   console.log(`Service running on port: ${port}`);
