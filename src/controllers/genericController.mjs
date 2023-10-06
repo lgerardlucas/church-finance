@@ -40,6 +40,7 @@ class GenericController {
 
   async findPartition(req, res) {
     try {
+      console.log("kljlj");
       const value = req.params.name;
       const result = await this.service.findPartition(value);
       res.status(200).json(result);
