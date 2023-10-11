@@ -8,7 +8,8 @@ class AuthController extends GenericController {
     super(User, "");
   }
 
-  async create(req, res) {
+  // Atenticaçao de login
+  async login(req, res) {
     try {
       const { email, password } = req.body;
 

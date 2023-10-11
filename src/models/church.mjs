@@ -43,7 +43,6 @@ const ChurchSchema = new mongoose.Schema({
 });
 
 ChurchSchema.pre("save", function (next) {
-  // Normalizando um campo para pesquisa
   const text_normalized =
     this.name +
     this.address +
@@ -63,12 +62,10 @@ ChurchSchema.pre("save", function (next) {
 });
 
 ChurchSchema.plugin(uniqueValidator, {
-  // Valida inserção de dados únicos no banco de dados.
   message: "O valor '{VALUE}' para o campo '{PATH}' já está no banco de dados.",
 });
 
 ChurchSchema.virtual("_paroquia", {
-  // Criar um relacionamento virtual para o campo _paroquia
   ref: "church",
   localField: "_idtype",
   foreignField: "_id",

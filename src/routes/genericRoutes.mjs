@@ -5,12 +5,12 @@ function createRoutes(controller) {
 
   router
     .post("/", controller.create.bind(controller))
-    .post("/login", controller.create.bind(controller));
+    .post("/login", controller.login.bind(controller));
 
   router
     .get("/", controller.list.bind(controller))
-    .get("/filter/:name", controller.findPartition.bind(controller))
-    .get("/:id", controller.find.bind(controller));
+    .get("/slug/:name", controller.findPartition.bind(controller))
+    .get("/id/:id", controller.find.bind(controller));
 
   router.delete("/:id", controller.delete.bind(controller));
   router.patch("/:id", controller.update.bind(controller));

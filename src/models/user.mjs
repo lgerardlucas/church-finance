@@ -50,7 +50,6 @@ UserSchema.pre("save", function (next) {
 });
 
 UserSchema.plugin(uniqueValidator, {
-  // Valida inserção de dados únicos no banco de dados.
   message: "O valor '{VALUE}' para o campo '{PATH}' já está no banco de dados.",
 });
 

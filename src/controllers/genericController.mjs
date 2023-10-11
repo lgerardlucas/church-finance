@@ -5,6 +5,10 @@ class GenericController {
     this.service = new GenericService(Model, populate_field);
   }
 
+  async login(req, res) {
+    return await undefined;
+  }
+
   async create(req, res) {
     try {
       const data = req.body;
@@ -40,7 +44,6 @@ class GenericController {
 
   async findPartition(req, res) {
     try {
-      console.log("kljlj");
       const value = req.params.name;
       const result = await this.service.findPartition(value);
       res.status(200).json(result);

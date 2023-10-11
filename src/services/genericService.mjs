@@ -1,4 +1,5 @@
 import diacritics from "diacritics";
+import mongoose from "mongoose";
 
 class GenericService {
   constructor(Model, populate_field = "") {
