@@ -31,10 +31,10 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-import { authRoutes } from "#routes/auth.mjs";
 import { churchRoutes } from "#routes/church.mjs";
 import { userRoutes } from "#routes/user.mjs";
-app.use("/", authRoutes);
+import { login } from "#middlewares/auth.mjs";
+app.use("/login", login);
 app.use("/church", churchRoutes);
 app.use("/user", userRoutes);
 

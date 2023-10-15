@@ -18,6 +18,7 @@
     "#moldes": "./src/moldes*",
     "#services": "./src/services*",
     "#controllers": "./src/controllers*",
+    "#middlewares": "./src/middlewares*",
     "#database": "./src/database*"
   },
   "author": "Marcos André Gerard Alves",
