@@ -2,7 +2,6 @@ import fs from "fs";
 import dotenv from "dotenv";
 import https from "https";
 import express from "express";
-import format from "date-fns";
 import connectBD from "#database/connect.mjs";
 
 // Carregar variáveis de ambiente a partir do arquivo .env
@@ -26,8 +25,7 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   const currentDate = new Date();
-  const formattedDate = format(currentDate, "dd/MM/yyyy HH:mm:ss");
-  res.send(`Data atual: ${formattedDate}`);
+  return res.status(200).json({ message: currentDate });
 });
 
 // Routes
