@@ -10,7 +10,16 @@ async function login(req, res) {
     //Validando usuário
     const user = await User.findOne({ email: email });
     if (!user) {
-      return res.status(401).json({ message: "Usuário não encontrado." });
+      return await res
+        .status(401)
+        .json({ auth: false, token: "", message: "Usuário não encontrado." });
+    }
+    if (user.isActive === false) {
+      return await res.status(401).json({
+        auth: false,
+        token: "",
+        message: "Usuário sem permissão de acesso.",
+      });
     }
 
     //Validando email e password
@@ -18,38 +27,42 @@ async function login(req, res) {
     if (user.email === email && validPassword === true) {
       const id = user.id;
       const token = jwt.sign({ id }, process.env.SECRET, {
-        expiresIn: 300, // expires in 5min
+        expiresIn: process.env.TOKEN_EXPIRATION,
       });
-      //retornando o token
-      return res.status(200).json({ auth: true, token: token });
+      return await res
+        .status(200)
+        .json({ auth: true, token: token, message: "Acesso liberado!" });
     }
 
-    return res.status(200).json({ auth: true, token: "" });
+    //Acesso negado
+    return await res
+      .status(200)
+      .json({ auth: false, token: "", message: "Login incorreto!" });
   } catch (error) {
-    res.status(500).json({ message: "Erro de autenticação." });
+    //Erro de autenticação
+    return await res
+      .status(500)
+      .json({ auth: false, token: "", message: "Erro de autenticação." });
   }
 }
 
-export { login };
+function verifyJWT(req, res, next) {
+  const token = req.headers["authorization"].startsWith("Bearer ")
+    ? req.headers["authorization"].slice(7)
+    : req.headers["authorization"];
 
-// // authMiddleware.js
-// import jwt from "jsonwebtoken";
+  if (!token)
+    return res
+      .status(401)
+      .json({ auth: false, message: "Nenhum token fornecido." });
 
-// function verifyJWT(req, res, next) {
-//   const token = req.headers["authorization"];
-//   if (!token)
-//     return res.status(401).json({ auth: false, message: "No token provided." });
+  jwt.verify(token, process.env.SECRET, function (err, decoded) {
+    if (err)
+      return res.status(500).json({ auth: false, message: "Token inválido." });
 
-//   jwt.verify(token, process.env.SECRET, function (err, decoded) {
-//     if (err)
-//       return res
-//         .status(500)
-//         .json({ auth: false, message: "Failed to authenticate token." });
+    req.userId = decoded.id;
+    next();
+  });
+}
 
-//     // se tudo estiver ok, salva no request para uso posterior
-//     req.userId = decoded.id;
-//     next();
-//   });
-// }
-
-// module.exports = verifyJWT;
+export { login, verifyJWT };

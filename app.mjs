@@ -33,10 +33,10 @@ app.get("/", (req, res) => {
 // Routes
 import { churchRoutes } from "#routes/church.mjs";
 import { userRoutes } from "#routes/user.mjs";
-import { login } from "#middlewares/auth.mjs";
+import { login, verifyJWT } from "#middlewares/auth.mjs";
 app.use("/login", login);
-app.use("/church", churchRoutes);
-app.use("/user", userRoutes);
+app.use("/church", verifyJWT, churchRoutes);
+app.use("/user", verifyJWT, userRoutes);
 
 server.listen(port, () => {
   console.log(`Service running on port: ${port}`);
